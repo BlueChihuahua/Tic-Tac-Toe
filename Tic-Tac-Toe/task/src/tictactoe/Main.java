@@ -5,6 +5,8 @@ public class Main {
     public enum GameState {
         NotFinished, Draw, XWins, OWins, Impossible
     }
+    //merge field check into enum states
+
     public static void main(String[] args) {
         // write your code here
         Scanner scan = new Scanner(System.in);
