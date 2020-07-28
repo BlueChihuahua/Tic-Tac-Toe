@@ -2,35 +2,80 @@ package tictactoe;
 import java.util.Scanner;
 
 public class Main {
-    public enum GameState {
-        NotFinished, Draw, XWins, OWins, Impossible
+
+    static class moveCoor {
+        private final int i;
+        private final int j;
+
+        public moveCoor (int i, int j) {
+            this.i = i;
+            this.j = j;
+        }
     }
+
+    public static moveCoor coordinates(String move) {
+        int j = Integer.parseInt(String.valueOf(move.charAt(0)));
+        int i = Integer.parseInt(String.valueOf(move.charAt(2)));
+
+        return new moveCoor(i, j);
+    }
+//    public enum GameState {
+//        NotFinished, Draw, XWins, OWins, Impossible
+//    }
     //merge field check into enum states
 
     public static void main(String[] args) {
-        // write your code here
+
         Scanner scan = new Scanner(System.in);
         char[][] gameField = startField(); //generate empty field
         String data = getField(scan); //user input initial field state
         updateField(gameField, data); //update initial field state
         printField(gameField); //display initial field
+        boolean badMove = true;
+        boolean badCoor = true;
+        boolean running = true;
+        while (running) {  //test move
+            String move = getMove(scan);
+            badMove = testMove(move);
+//            System.out.println("begin");
+//            if (badMove) {
+//                move = getMove(scan);
+//            }
+            if (!badMove && badCoor) {
+                moveCoor coor = coordinates(move);
+                badCoor = testCoord(coor.i, coor.j, gameField);
+                System.out.println("This cell is occupied! Choose another one!");
+                return;
+//                System.out.println("middle");
+//                System.out.println("badCoor");
+            } else if (!badMove && !badCoor) {
+                moveCoor coor = coordinates(move);
+                updateFieldMoveX(gameField, coor.i, coor.j);
+                printField(gameField);
+                running = false;
+            }
+
+        }
+
+
 //        char[][] testField = getChars(data);
         // X = 88  0 = 79 _ = 95
 //        testState(testField);
 
     }
-//update? to update inner field
-    private static char[][] getChars(String data) {
-        char[][] testField = new char[3][3];
-        int c = 0;
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                testField[i][j] = data.charAt(c);
-                c++;
-            }
-        }
-        return testField;
-    }
+//creates test field
+//    private static char[][] getChars(String data) {
+//        char[][] testField = new char[3][3];
+//        int c = 0;
+//        for (int i = 0; i < 3; i++) {
+//            for (int j = 0; j < 3; j++) {
+//                testField[i][j] = data.charAt(c);
+//                c++;
+//            }
+//        }
+//        return testField;
+//    }
+
 // not testing field for condition in this phase
 //    private static void testState(char[][] testField) {
 //        //test variables
@@ -138,7 +183,7 @@ public class Main {
 //            System.out.println("Draw");
 //        }
 //    }
-
+    // prints game field
     private static void printField(char[][] gameField) {
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 9; j++) {
@@ -147,35 +192,78 @@ public class Main {
             System.out.println();
         }
     }
-//create a second function similar to this function that will update individual move after user inputs initial board state
-    //function should input i j and output the updated 3x3 grid with the user's move included, assume user is X
-    //function should test input i and j to make sure they are in range (1-3 inclusive)
-    //function should test input is an integer
-    //function should test if cell is occupied before updating
-    //function should convert i & j to array location by subtracting 1 from each
-    // Int Int -> 3d array (3x3)
-    //may need to split functions to a - check user input is suitable, b - check space occupied, c - update field.
+    //sets initial field after user input char
     private static void updateField(char[][] gameField, String data) {
         int c = 0;
         for (int i = 1; i < 4; i++) {
             for (int j = 2; j < 7; j+=2) {
-                gameField[i][j] = data.charAt(c);
+                if(data.charAt(c) == 'X' || data.charAt(c) == 'O') {
+                    gameField[i][j] = data.charAt(c);
+                }
                 c++;
             }
         }
     }
+    //update move X
+    private static void updateFieldMoveX(char[][] gamefield, int i, int j) {
+        j = j * 2;
+        if (i == 1) {
+            i = 3;
+        } else if (i == 3) {
+            i = 1;
+        }
+        gamefield[i][j] = 'X';
+    }
+
 //will get initial field start of phase
     private static String getField(Scanner scan) {
         System.out.print("Enter cells: ");
-        return scan.next();
+        return scan.nextLine();
+
+    }
+    //gets next proposed move coordinates
+    private static String getMove(Scanner scan) {
+        System.out.print("Enter the coordinates: ");
+        return scan.nextLine();
+    }
+    //tests getmove
+    private static boolean testMove(String move) {
+//        System.out.println(move + " " + "length: " + move.length());
+        if (Character.isDigit(move.charAt(0))) {
+            int a = Integer.parseInt(String.valueOf(move.charAt(0)));
+            int b = Integer.parseInt(String.valueOf(move.charAt(2)));
+//            System.out.println("convert string to int characters: " + a + " " + b);
+            if (a > 3 || a < 1 || b > 3 || b < 1) {
+                System.out.println("Coordinates should be from 1 to 3!");
+                return true;
+            } else if (move.length() > 3) {
+                System.out.println("Coordinates should be from 1 to 3!");
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            System.out.println("You should enter numbers!");
+            return true;
+        }
+
+    }
+    private static boolean testCoord(int i, int j, char[][] gameField) {
+        if (gameField[i][j] == 'X' || gameField[i][j] == 'O') {
+            System.out.println("This cell is occupied! Choose another one!");
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
     private static char[][] startField() {
         return new char[][]{
                     {'-', '-', '-', '-', '-', '-', '-', '-', '-'},
-                    {'|', ' ', '_', ' ', '_', ' ', '_', ' ', '|'},
-                    {'|', ' ', '_', ' ', '_', ' ', '_', ' ', '|'},
-                    {'|', ' ', '_', ' ', '_', ' ', '_', ' ', '|'},
+                    {'|', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '|'},
+                    {'|', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '|'},
+                    {'|', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '|'},
                     {'-', '-', '-', '-', '-', '-', '-', '-', '-'},
             };
     }
