@@ -308,28 +308,18 @@ files:
 feedback_link: https://hyperskill.org/projects/48/stages/258/implement
 status: Failed
 feedback:
-  message: |-
-    Wrong answer in test #1
-
-    The first field is correct, but the second is not
-
-    Please find below the output of your program during this failed test.
-    Note that the &#39;&gt;&#39; character indicates the beginning of the input line.
-
-    ---
-
-    Enter cells: &gt; _XXOO_OX_
-    ---------
-    |   X X |
-    | O O   |
-    | O X   |
-    ---------
-    Enter the coordinates: &gt; 1 1
-    Enter the coordinates: &gt; 1 2
-    ---------
-    |   X X |
-    | X O   |
-    | O X   |
-    ---------
-  time: Tue, 28 Jul 2020 09:48:19 UTC
+  message: "Exception in test #1\n\nProbably your program run out of input (Scanner\
+    \ tried to read more than expected).\n\njava.util.NoSuchElementException: No line\
+    \ found\n\tat java.base/java.util.Scanner.nextLine(Scanner.java:1651)\n\tat tictactoe.Main.getMove(Main.java:219)\n\
+    \tat tictactoe.Main.main(Main.java:38)\n\nPlease find below the output of your\
+    \ program during this failed test.\nNote that the &#39;&gt;&#39; character indicates\
+    \ the beginning of the input line.\n\n---\n\nEnter cells: &gt; _XXOO_OX_\n---------\n\
+    |   X X |\n| O O   |\n| O X   |\n---------\nEnter the coordinates: &gt; 1 1\n\
+    Enter the coordinates: &gt; 1 2\nEnter the coordinates: &gt; 1 3\nEnter the coordinates:\
+    \ &gt; 2 1\nEnter the coordinates: &gt; 2 2\nThis cell is occupied! Choose another\
+    \ one!\nThis cell is occupied! Choose another one!\nEnter the coordinates: &gt;\
+    \ 2 3\nThis cell is occupied! Choose another one!\nThis cell is occupied! Choose\
+    \ another one!\nEnter the coordinates: &gt; 3 1\nEnter the coordinates: &gt; 3\
+    \ 2\nEnter the coordinates: &gt; 3 3\nEnter the coordinates:"
+  time: Tue, 28 Jul 2020 10:08:15 UTC
 record: -1

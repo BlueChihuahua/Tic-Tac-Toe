@@ -29,27 +29,23 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         char[][] gameField = startField(); //generate empty field
         String data = getField(scan); //user input initial field state
-        updateField(gameField, data); //update initial field state
+        updateField(gameField, data);//update initial field state
         printField(gameField); //display initial field
-        boolean badMove = true;
-        boolean badCoor = true;
+//        boolean badMove = true;
+//        boolean badCoor = true;
         boolean running = true;
         while (running) {  //test move
             String move = getMove(scan);
-            badMove = testMove(move);
-//            System.out.println("begin");
-//            if (badMove) {
-//                move = getMove(scan);
-//            }
-            if (!badMove && badCoor) {
-                moveCoor coor = coordinates(move);
-                badCoor = testCoord(coor.i, coor.j, gameField);
+            printField(gameField);
+            moveCoor coor = coordinates(move);
+            System.out.println("i = " + coor.i);
+            System.out.println("j = " + coor.j);
+            int character = gameField[coor.i][coor.j];
+            System.out.println("field number: " + character);
+            if (!testMove(move) && testCoord(coor.i, coor.j, gameField)) {
                 System.out.println("This cell is occupied! Choose another one!");
-                return;
-//                System.out.println("middle");
-//                System.out.println("badCoor");
-            } else if (!badMove && !badCoor) {
-                moveCoor coor = coordinates(move);
+                running = true;
+                } else if (!testMove(move) && !testCoord(coor.i, coor.j, gameField)) {
                 updateFieldMoveX(gameField, coor.i, coor.j);
                 printField(gameField);
                 running = false;
@@ -205,14 +201,14 @@ public class Main {
         }
     }
     //update move X
-    private static void updateFieldMoveX(char[][] gamefield, int i, int j) {
+    private static void updateFieldMoveX(char[][] gameField, int i, int j) {
         j = j * 2;
         if (i == 1) {
             i = 3;
         } else if (i == 3) {
             i = 1;
         }
-        gamefield[i][j] = 'X';
+        gameField[i][j] = 'X';
     }
 
 //will get initial field start of phase
@@ -248,11 +244,13 @@ public class Main {
         }
 
     }
-    private static boolean testCoord(int i, int j, char[][] gameField) {
-        if (gameField[i][j] == 'X' || gameField[i][j] == 'O') {
+    private static boolean testCoord(int i, int j, char[][] gamefield) {
+        System.out.println(gamefield[i][j]);
+        if (gamefield[i][j] == 'X' || gamefield[i][j] == 'O') {
             System.out.println("This cell is occupied! Choose another one!");
             return true;
         } else {
+            System.out.println("is the other part even running?");
             return false;
         }
 
