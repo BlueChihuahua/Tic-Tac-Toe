@@ -267,6 +267,7 @@
 //}
 
 package tictactoe;
+
 import java.util.Scanner;
 
 public class Main {
@@ -274,31 +275,43 @@ public class Main {
         System.out.print("Enter cells: ");
         String board = new Scanner(System.in).nextLine().toUpperCase();
         print(board);
-        //while !validmovestatus.VALID do this:
-        String move = new Scanner(System.in).nextLine();
-        valid(move, board);
-        //once valid, print new board:
-
-
+        boolean isValid = false;
+        while (!isValid) {
+            System.out.print("Enter the Coordinates: ");
+            String move = new Scanner(System.in).nextLine();
+            ValidMoveStatus valid = check(move, board);
+            switch (valid) {
+                case NOTNUMBER:
+                    System.out.println(ValidMoveStatus.NOTNUMBER);
+                    break;
+                case OUTSIDERANGE:
+                    System.out.println(ValidMoveStatus.OUTSIDERANGE);
+                    break;
+                case OCCUPIED:
+                    System.out.println(ValidMoveStatus.OCCUPIED);
+                    break;
+                case VALID:
+                    //method to fill move
+                    board = updateBoard(board, move);
+                    print(board);
+                    isValid = true;
+                    break;
+                default:
+                    break;
+            }
+        }
     }
-    //check move validity output
-//    private static ValidMoveStatus valid(String move, String board) {
-//
-//        System.out.println("check status");
-//        ValidMoveStatus isValid = check(move,board);
-//        if (isValid == ValidMoveStatus.NOTNUMBER) return isValid;
-//        if (isValid == ValidMoveStatus.OUTSIDERANGE) return isValid;
-//        if (isValid == ValidMoveStatus.OCCUPIED) return isValid;
-//        return isValid;
-//    }
     //check move
-    private static ValidMoveStatus check(String move) {
+    private static ValidMoveStatus check(String move, String board) {
         ValidMoveStatus check = error(move);
-        if (check == ValidMoveStatus.NOTNUMBER) return check;
-        if (check == ValidMoveStatus.OUTSIDERANGE) return check;
-
-
-        return check;
+        if (check == ValidMoveStatus.NOTNUMBER) {
+            return check;
+        } else if (check == ValidMoveStatus.OUTSIDERANGE) {
+            return check;
+        }else {
+            check = notOccupiedCheck(move, board);
+            return check;
+        }
     }
     private static ValidMoveStatus error(String move) {
         int a = Integer.parseInt(String.valueOf(move.charAt(0)));
@@ -319,11 +332,31 @@ public class Main {
                 c++;
             }
         }
-        int b = Integer.parseInt(String.valueOf(move.charAt(0)));
-        int a = Integer.parseInt(String.valueOf(move.charAt(2)));
+        int b = Integer.parseInt(String.valueOf(move.charAt(0))) - 1;
+        int a = Integer.parseInt(String.valueOf(move.charAt(2))) - 1;
         if (boardArray[a][b] == 'X' || boardArray[a][b] == 'O') {
             return ValidMoveStatus.OCCUPIED;
         } else return ValidMoveStatus.VALID;
+    }
+    private static String updateBoard(String board, String move) {
+        char[][] boardArray = new char[3][3];
+        int c = 0;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                boardArray[i][j] = board.charAt(c);
+                c++;
+            }
+        }
+        int b = Integer.parseInt(String.valueOf(move.charAt(0))) - 1;
+        int a = Integer.parseInt(String.valueOf(move.charAt(2))) - 1;
+        boardArray[a][b] = 'X';
+        StringBuilder result = new StringBuilder();
+        for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 3; col++) {
+                result.append(boardArray[row][col]);
+            }
+        }
+        return String.valueOf(result);
     }
 
     //print board
