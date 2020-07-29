@@ -297,6 +297,7 @@ public class Main {
         if (check == ValidMoveStatus.NOTNUMBER) return check;
         if (check == ValidMoveStatus.OUTSIDERANGE) return check;
 
+
         return check;
     }
     private static ValidMoveStatus error(String move) {
@@ -307,6 +308,22 @@ public class Main {
         } else if (!Character.isDigit(move.charAt(0))) {
             return ValidMoveStatus.NOTNUMBER;
         } else return ValidMoveStatus.UNKNOWN;
+    }
+    //create array & check move if occupied or valid
+    private static ValidMoveStatus notOccupiedCheck (String move, String board) {
+        char[][] boardArray = new char[3][3];
+        int c = 0;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                boardArray[i][j] = board.charAt(c);
+                c++;
+            }
+        }
+        int b = Integer.parseInt(String.valueOf(move.charAt(0)));
+        int a = Integer.parseInt(String.valueOf(move.charAt(2)));
+        if (boardArray[a][b] == 'X' || boardArray[a][b] == 'O') {
+            return ValidMoveStatus.OCCUPIED;
+        } else return ValidMoveStatus.VALID;
     }
 
     //print board
