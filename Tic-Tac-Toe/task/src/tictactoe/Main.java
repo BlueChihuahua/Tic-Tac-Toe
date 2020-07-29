@@ -361,11 +361,12 @@ public class Main {
 
     //print board
     private static void print(String board) {
-        System.out.println("+-------+");
-        System.out.printf("| %c %c %c |%n", board.charAt(0), board.charAt(1), board.charAt(2));
-        System.out.printf("| %c %c %c |%n", board.charAt(3), board.charAt(4), board.charAt(5));
-        System.out.printf("| %c %c %c |%n", board.charAt(6), board.charAt(7), board.charAt(8));
-        System.out.println("+-------+");
+        //a > b ? a : b
+        System.out.println("---------");
+        System.out.printf("| %c %c %c |%n", (board.charAt(0) == '_' ? ' ' : board.charAt(0)), (board.charAt(1) == '_' ? ' ' : board.charAt(1)), (board.charAt(2) == '_' ? ' ' : board.charAt(2)));
+        System.out.printf("| %c %c %c |%n", (board.charAt(3) == '_' ? ' ' : board.charAt(3)), (board.charAt(4) == '_' ? ' ' : board.charAt(4)), (board.charAt(5) == '_' ? ' ' : board.charAt(5)));
+        System.out.printf("| %c %c %c |%n", (board.charAt(6) == '_' ? ' ' : board.charAt(6)), (board.charAt(7) == '_' ? ' ' : board.charAt(7)), (board.charAt(8) == '_' ? ' ' : board.charAt(8)));
+        System.out.println("---------");
     }
 
     enum ValidMoveStatus {

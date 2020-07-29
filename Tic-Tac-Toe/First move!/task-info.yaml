@@ -319,11 +319,11 @@ feedback:
     ---
 
     Enter cells: &gt; _XXOO_OX_
-    +-------+
-    | _ X X |
-    | O O _ |
-    | O X _ |
-    +-------+
+    ---------
+    |   X X |
+    | O O   |
+    | O X   |
+    ---------
     Enter the Coordinates: &gt; 4 1
     Coordinates should be from 1 to 3!
     Enter the Coordinates: &gt; 1 2
@@ -339,10 +339,10 @@ feedback:
     Enter the Coordinates: &gt; 3 1
     This cell is occupied! Choose another one!
     Enter the Coordinates: &gt; 3 2
-    +-------+
-    | _ X X |
+    ---------
+    |   X X |
     | O O X |
-    | O X _ |
-    +-------+
-  time: Wed, 29 Jul 2020 10:39:29 UTC
+    | O X   |
+    ---------
+  time: Wed, 29 Jul 2020 11:02:22 UTC
 record: -1
