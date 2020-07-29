@@ -291,7 +291,6 @@ public class Main {
                     System.out.println(ValidMoveStatus.OCCUPIED);
                     break;
                 case VALID:
-                    //method to fill move
                     board = updateBoard(board, move);
                     print(board);
                     isValid = true;
@@ -301,7 +300,7 @@ public class Main {
             }
         }
     }
-    //check move
+    //check move -> returns invalid move, occupied move, or valid move
     private static ValidMoveStatus check(String move, String board) {
         ValidMoveStatus check = error(move);
         if (check == ValidMoveStatus.NOTNUMBER) {
@@ -313,6 +312,7 @@ public class Main {
             return check;
         }
     }
+    //checks invalid move entry
     private static ValidMoveStatus error(String move) {
         int a = Integer.parseInt(String.valueOf(move.charAt(0)));
         int b = Integer.parseInt(String.valueOf(move.charAt(2)));
@@ -322,7 +322,7 @@ public class Main {
             return ValidMoveStatus.NOTNUMBER;
         } else return ValidMoveStatus.UNKNOWN;
     }
-    //create array & check move if occupied or valid
+    //create array & checks if move space is occupied or valid
     private static ValidMoveStatus notOccupiedCheck (String move, String board) {
         char[][] boardArray = new char[3][3];
         int c = 0;
@@ -338,6 +338,7 @@ public class Main {
             return ValidMoveStatus.OCCUPIED;
         } else return ValidMoveStatus.VALID;
     }
+    //updates the board string with X move when move is valid
     private static String updateBoard(String board, String move) {
         char[][] boardArray = new char[3][3];
         int c = 0;
@@ -359,7 +360,7 @@ public class Main {
         return String.valueOf(result);
     }
 
-    //print board
+    //print board from board string
     private static void print(String board) {
         //a > b ? a : b
         System.out.println("---------");
