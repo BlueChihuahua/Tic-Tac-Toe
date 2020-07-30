@@ -272,10 +272,13 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.print("Enter cells: ");
-        String board = new Scanner(System.in).nextLine().toUpperCase();
+//        System.out.print("Enter cells: ");
+//        String board = new Scanner(System.in).nextLine().toUpperCase();
+        String board = "_________"; //initial empty playing field
         print(board);
         boolean isValid = false;
+        boolean gameComplete = false;
+        char turn = 'X';
         while (!isValid) {
             System.out.print("Enter the Coordinates: ");
             String move = new Scanner(System.in).nextLine();
@@ -291,7 +294,13 @@ public class Main {
                     System.out.println(ValidMoveStatus.OCCUPIED);
                     break;
                 case VALID:
-                    board = updateBoard(board, move);
+                    if (turn == 'X') {
+                        board = updateBoardX(board, move);
+                        turn = 'O';
+                    } else if (turn == 'O') {
+                        board = updateBoardO(board, move);
+                        turn = 'X';
+                    }
                     print(board);
                     isValid = true;
                     break;
@@ -322,16 +331,9 @@ public class Main {
             return ValidMoveStatus.NOTNUMBER;
         } else return ValidMoveStatus.UNKNOWN;
     }
-    //create array & checks if move space is occupied or valid
+    // checks if move space is occupied or valid
     private static ValidMoveStatus notOccupiedCheck (String move, String board) {
-        char[][] boardArray = new char[3][3];
-        int c = 0;
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                boardArray[i][j] = board.charAt(c);
-                c++;
-            }
-        }
+        char[][] boardArray = getChars(board);
         int b = Integer.parseInt(String.valueOf(move.charAt(0))) - 1;
         int a = Integer.parseInt(String.valueOf(move.charAt(2))) - 1;
         if (a == 0) {
@@ -343,8 +345,9 @@ public class Main {
             return ValidMoveStatus.OCCUPIED;
         } else return ValidMoveStatus.VALID;
     }
-    //updates the board string with X move when move is valid
-    private static String updateBoard(String board, String move) {
+
+    // creates array
+    private static char[][] getChars(String board) {
         char[][] boardArray = new char[3][3];
         int c = 0;
         for (int i = 0; i < 3; i++) {
@@ -353,6 +356,12 @@ public class Main {
                 c++;
             }
         }
+        return boardArray;
+    }
+
+    //updates the board string with X move when move is valid
+    private static String updateBoardX(String board, String move) {
+        char[][] boardArray = getChars(board);
         int b = Integer.parseInt(String.valueOf(move.charAt(0))) - 1;
         int a = Integer.parseInt(String.valueOf(move.charAt(2))) - 1;
         if (a == 0) {
@@ -361,6 +370,25 @@ public class Main {
             a = 0;
         }
         boardArray[a][b] = 'X';
+        StringBuilder result = new StringBuilder();
+        for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 3; col++) {
+                result.append(boardArray[row][col]);
+            }
+        }
+        return String.valueOf(result);
+    }
+    //updates the board string with O move when move is valid
+    private static String updateBoardO(String board, String move) {
+        char[][] boardArray = getChars(board);
+        int b = Integer.parseInt(String.valueOf(move.charAt(0))) - 1;
+        int a = Integer.parseInt(String.valueOf(move.charAt(2))) - 1;
+        if (a == 0) {
+            a = 2;
+        } else if (a == 2) {
+            a = 0;
+        }
+        boardArray[a][b] = 'O';
         StringBuilder result = new StringBuilder();
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 3; col++) {
