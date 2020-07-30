@@ -334,6 +334,11 @@ public class Main {
         }
         int b = Integer.parseInt(String.valueOf(move.charAt(0))) - 1;
         int a = Integer.parseInt(String.valueOf(move.charAt(2))) - 1;
+        if (a == 0) {
+            a = 2;
+        } else if (a == 2) {
+            a = 0;
+        }
         if (boardArray[a][b] == 'X' || boardArray[a][b] == 'O') {
             return ValidMoveStatus.OCCUPIED;
         } else return ValidMoveStatus.VALID;
@@ -350,6 +355,11 @@ public class Main {
         }
         int b = Integer.parseInt(String.valueOf(move.charAt(0))) - 1;
         int a = Integer.parseInt(String.valueOf(move.charAt(2))) - 1;
+        if (a == 0) {
+            a = 2;
+        } else if (a == 2) {
+            a = 0;
+        }
         boardArray[a][b] = 'X';
         StringBuilder result = new StringBuilder();
         for (int row = 0; row < 3; row++) {
