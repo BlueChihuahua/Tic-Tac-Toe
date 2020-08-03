@@ -3,6 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Tic-Tac-Toe.iml" filepath="$PROJECT_DIR$/.idea/modules/Tic-Tac-Toe.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Problems/Boys in a sport class/Tic-Tac-Toe.Problems-Boys_in_a_sport_class.iml" filepath="$PROJECT_DIR$/.idea/modules/Problems/Boys in a sport class/Tic-Tac-Toe.Problems-Boys_in_a_sport_class.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Problems/Boys in a sport class/Tic-Tac-Toe.Problems-Boys_in_a_sport_class.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Problems/Boys in a sport class/Tic-Tac-Toe.Problems-Boys_in_a_sport_class.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Problems/Boys in a sport class/Tic-Tac-Toe.Problems-Boys_in_a_sport_class.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Problems/Boys in a sport class/Tic-Tac-Toe.Problems-Boys_in_a_sport_class.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Problems/Fix compile-time errors/Tic-Tac-Toe.Problems-Fix_compile-time_errors.iml" filepath="$PROJECT_DIR$/.idea/modules/Problems/Fix compile-time errors/Tic-Tac-Toe.Problems-Fix_compile-time_errors.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Problems/Fix compile-time errors/Tic-Tac-Toe.Problems-Fix_compile-time_errors.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Problems/Fix compile-time errors/Tic-Tac-Toe.Problems-Fix_compile-time_errors.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Problems/Fix compile-time errors/Tic-Tac-Toe.Problems-Fix_compile-time_errors.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Problems/Fix compile-time errors/Tic-Tac-Toe.Problems-Fix_compile-time_errors.test.iml" />

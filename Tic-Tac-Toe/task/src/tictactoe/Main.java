@@ -294,6 +294,7 @@ public class Main {
                     System.out.println(ValidMoveStatus.OCCUPIED);
                     break;
                 case VALID:
+                    //probably can't switch turns like this
                     if (turn == 'X') {
                         board = updateBoardX(board, move);
                         turn = 'O';
